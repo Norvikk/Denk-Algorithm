@@ -1,10 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Kenny
 {
-    public static class Loops
+    public static class Get
     {
-        public static string GetUserAnswer(
+        public static string _UserAnswer(
             string Question,
             int timeout = 1000,
             string DespiseItem = "Cartman",
@@ -79,22 +85,76 @@ namespace Kenny
             }
             return temp_string_QuestionCarrier;
         }
-    }
 
-    public static class GetA
-    {
-        public static int RandomSecureNumber(int fromInclusive, int toExclusive) =>
-            System.Security.Cryptography.RandomNumberGenerator.GetInt32(fromInclusive, toExclusive);
+        public static int _RandomSecureInt(int min, int max) =>
+            System.Security.Cryptography.RandomNumberGenerator.GetInt32(min, max);
 
-        public static string GetSecureRandomString(int length)
+        public static string _SecureRandomUpperString(int length)
         {
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             return new string(
                 Enumerable
                     .Repeat(chars, length)
-                    .Select(s => s[RandomSecureNumber(0, s.Length)])
+                    .Select(s => s[_RandomSecureInt(0, s.Length )])
                     .ToArray()
             );
+        }
+
+        public static string _SecureRandomLowerString(int length)
+        {
+            const string chars = "abcdefghijklmnopqrstuvwxyz";
+            return new string(
+                Enumerable
+                    .Repeat(chars, length)
+                    .Select(s => s[_RandomSecureInt(0, s.Length)])
+                    .ToArray()
+            );
+        }
+
+        public static string _SecureRandomMixedString(int length)
+        {
+            const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            return new string(
+                Enumerable
+                    .Repeat(chars, length)
+                    .Select(s => s[_RandomSecureInt(0, s.Length)])
+                    .ToArray()
+            );
+        }
+
+        public static string _SecureRandomAllString(int length)
+        {
+            const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!#$%&()*.,-/:;><=?@[]^_'{]|~";
+            return new string(
+                Enumerable
+                    .Repeat(chars, length)
+                    .Select(s => s[_RandomSecureInt(0, (s.Length - 1))])
+                    .ToArray()
+            );
+        }
+
+        public static string _SecureRandomSymbol(int length)
+        {
+            const string chars = "!#$%&()*.,-/:;><=?@[]^_'{]|~ ";
+            return new string(
+                Enumerable
+                    .Repeat(chars, length)
+                    .Select(s => s[_RandomSecureInt(0, s.Length)])
+                    .ToArray()
+            );
+        }
+
+        public static string[]? _LinesFromFile(string path)
+        {
+            try
+            {
+                return System.IO.File.ReadAllLines(@path);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("ERROR RETRIEVERING LINES FROM FILE; ERROR: " + e);
+                return null;
+            }
         }
     }
 }
