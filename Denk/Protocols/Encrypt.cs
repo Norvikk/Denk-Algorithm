@@ -13,13 +13,36 @@ namespace Denk.Protocols
 
     internal static class Encrypt
     {
-        public static void Start(int iterations, string data)
+        public static async void Start(int iterations, string data)
         {
-            
             List<string> Keys = new();
             List<string> EncryptedLoad = new();
-            WL(data);
+            AssignKeys(ref Keys, data, iterations);
 
+            foreach (char c in data)
+            {
+                EncryptedLoad.Add(Keys[Keys.IndexOf(c.ToString()) + 1]);
+            }
+
+            string path = _UserAnswer("Where should the files be saved to?");
+
+            using StreamWriter sw1 = new(@path + @"\Encrypted.txt");
+            foreach (string crypt in EncryptedLoad)
+            {
+                sw1.Write(crypt);
+            }
+
+            using StreamWriter sw2 = new(@path + @"\Keys.txt");
+            foreach (string key in Keys)
+            {
+                sw2.Write(key + "~");
+            }
+        }
+
+        private static string GenerateKey(int length) => _SecureRandomAllString(length);
+
+        private static void AssignKeys(ref List<string> Keys, string data, int iterations)
+        {
             foreach (char c in data)
             {
                 if (!Keys.Contains(c.ToString()))
@@ -28,23 +51,6 @@ namespace Denk.Protocols
                     Keys.Add(GenerateKey(iterations));
                 }
             }
-
-            foreach (char c in data)
-            {
-                EncryptedLoad.Add(Keys[ Keys.IndexOf(c.ToString()) + 1]);
-            }
-
-            ListW(Keys);
-            Space();
-            ListW(EncryptedLoad);
-            Space();
-           
-            foreach(string crypted in EncryptedLoad)
-            {
-                W(Keys[Keys.IndexOf(crypted) - 1]);
-            }
         }
-
-        private static string GenerateKey(int length) => _SecureRandomAllString(length);
     }
 }

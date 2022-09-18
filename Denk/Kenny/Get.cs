@@ -124,7 +124,7 @@ namespace Kenny
 
         public static string _SecureRandomAllString(int length)
         {
-            const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!#$%&()*.,-/:;><=?@[]^_'{]|~";
+            const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!#$%&()*.,-/:;><=?@[]^_'{]|";
             return new string(
                 Enumerable
                     .Repeat(chars, length)

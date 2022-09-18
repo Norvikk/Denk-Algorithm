@@ -21,6 +21,8 @@ namespace Kenny
         }
 
         public static async Task _WriteToFile(string path, string[] data) =>
-            await File.WriteAllLinesAsync(path, data);
+            await File.WriteAllLinesAsync(@path, data);
+
+        
     }
 }
