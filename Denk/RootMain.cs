@@ -15,7 +15,7 @@
                // string _iterationData = Kenny.Get._UserAnswer("How many characters should each key have?", DespiseItem: "0", CharList: "123");
                 Kenny.Utilities.Clear();
                 // Denk.Protocols.Encrypt.Start(Convert.ToInt32(_iterationData), _messageData);
-                Denk.Protocols.Encrypt.Start(10, "HELLO world hello WORLD abcdefg");
+                Denk.Protocols.Encrypt.Start(5, "Queen Of Blades");
             }
             else if (_protocol == "2") // Decrypt
             {
