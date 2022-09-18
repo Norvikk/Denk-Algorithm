@@ -1,4 +1,5 @@
-# Denk encrypting algorithm featuring Kenny 
+# Denk encrypting algorithm 
+### + Kenny Libraries
 
 Rewrite of my DeenK simple key encryption Algorithm
 
